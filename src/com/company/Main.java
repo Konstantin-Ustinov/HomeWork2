@@ -8,7 +8,7 @@ public class Main {
         System.out.println("Задание 2");
         task2((byte) 1, (short) 2016);
         System.out.println("Задание 3");
-        task3(2004);
+        task3(2404);
         System.out.println("Задание 4");
         task4(95);
         System.out.println("Задание 5");
@@ -31,13 +31,14 @@ public class Main {
     }
 
     public static void task2(byte clientOS, short clientDeviceYear) {
-        if (clientOS == 0 & clientDeviceYear >= 2015) {
+        short frontierYear = 2015;
+        if (clientOS == 0 & clientDeviceYear >= frontierYear) {
             System.out.println("Установите версию приложения для iOS по ссылке");
-        } else if (clientOS == 0 & clientDeviceYear < 2015) {
+        } else if (clientOS == 0 & clientDeviceYear < frontierYear) {
             System.out.println("Установите облегченную версию приложения для iOS по ссылке");
-        } else if (clientOS == 1 & clientDeviceYear >= 2015) {
+        } else if (clientOS == 1 & clientDeviceYear >= frontierYear) {
             System.out.println("Установите версию приложения для Android по ссылке");
-        } else if (clientOS == 1 & clientDeviceYear < 2015) {
+        } else if (clientOS == 1 & clientDeviceYear < frontierYear) {
             System.out.println("Установите облегченную версию приложения для Android по ссылке");
         } else {
             System.out.println("Такой клиент не найден.");
@@ -45,7 +46,7 @@ public class Main {
     }
 
     public static void task3(int year) {
-        if (year%4 == 0 || year%100 == 0 & year%400 != 0) {
+        if (year%100 != 0 & year%4 == 0 || year%400 == 0) {
             System.out.println(year + " год является високосным");
         } else {
             System.out.println(year + " год не является високосным");
@@ -66,6 +67,7 @@ public class Main {
 
     public static void task5(int monthNumber) {
         switch(monthNumber) {
+            case 12:
             case 1:
             case 2:
                 System.out.println("Зима");
@@ -85,16 +87,13 @@ public class Main {
             case 11:
                 System.out.println("Осень");
                 break;
-            case 12:
-                System.out.println("Зима");
-                break;
             default:
                 System.out.println("Месяц не отностится ни к какому сезону");
         }
     }
 
     public static String task6(int age, int salary) {
-        int creditLimit = age >= 23 ? salary*3 : salary*2;
+        int creditLimit = age >= 23 ? salary * 3 : salary * 2;
 
         if (salary >= 80_000) {
             creditLimit *= 1.5;
@@ -119,14 +118,15 @@ public class Main {
             bet -= 0.007;
         }
 
-        double payMonth = wantedSum*bet/12;
+        double payMonth = wantedSum * bet / 12;
+
+        String txt = "Максимальный платеж при ЗП " + salary + " равен " + maxPayMonth + " рублей. " +
+                "Платеж по кредиту " + payMonth + " рублей. ";
 
         if (payMonth > maxPayMonth) {
-            return "Максимальный платеж при ЗП " + salary + " равен " + maxPayMonth + " рублей. " +
-                    "Платеж по кредиту " + payMonth + " рублей. Отказано";
+            return txt + "Отказано";
         } else {
-            return "Максимальный платеж при ЗП " + salary + " равен " + maxPayMonth + " рублей. " +
-                    "Платеж по кредиту " + payMonth + " рублей. Одобрено";
+            return txt + "Одобрено";
         }
     }
 }
